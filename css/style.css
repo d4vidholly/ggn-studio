@@ -34,7 +34,7 @@
   --font-cond:  'Barlow Condensed', sans-serif;
   --font-body:  'Barlow', sans-serif;
 
-  --nav-h:      54px;
+  --nav-h:      82px;
   --max-w:      1080px;
   --pad-x:      clamp(16px, 4vw, 32px);
   --pad-y:      clamp(48px, 7vw, 72px);
@@ -1017,7 +1017,7 @@ html.site-locked .nav-hamburger { display: none; }
 @media (min-width: 820px) {
 
   /* Nav: hamburger hidden, nav-right inline row */
-  .nav-logo-img { height: 36px; }
+  .nav-logo-img { height: 42px; }
   .nav-hamburger { display: none; }
   .nav-right {
     position: static;
@@ -1029,10 +1029,10 @@ html.site-locked .nav-hamburger { display: none; }
     transform: none; opacity: 1; pointer-events: auto;
     transition: none;
   }
-  .nav-right .nav-cta { margin-top: 0; align-self: auto; }
+  .nav-right .nav-cta { margin-top: 0; align-self: auto; font-size: clamp(13px, 1.5vw, 16px); height: 42px; display: inline-flex; align-items: center; }
   .nav-links { flex-direction: row; gap: clamp(14px, 3vw, 28px); }
   .nav-links a {
-    font-size: clamp(13px, 1.5vw, 15px); letter-spacing: 0.14em;
+    font-size: clamp(13px, 1.5vw, 16px); letter-spacing: 0.14em;
     display: inline; padding: 0; border-bottom: none;
   }
 
