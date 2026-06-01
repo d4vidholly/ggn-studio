@@ -1241,8 +1241,10 @@ video.modal-media { max-height: 50vh; }
   /* Hero headline — 25% bigger */
   .hero-headline { font-size: clamp(55px, 15vw, 108px); }
 
-  /* Hero — don't force full viewport height, let content breathe */
-  .hero { min-height: auto; padding-bottom: clamp(40px, 8vw, 60px); }
+  /* Hero — tall enough for packet to float between text and button */
+  .hero { min-height: 85svh; }
+  .hero-inner { justify-content: flex-start; }
+  .hero-right { flex: 1; display: flex; align-items: center; justify-content: center; }
 }
 
 /* ============================================================
