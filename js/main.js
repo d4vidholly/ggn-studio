@@ -8,16 +8,16 @@
 const STICKERS = [
   {
     id: 1,
-    img:         "album/Primary/1.png",
+    img:         "album/Primary/1.webp",
     alt:         "GGN Studio illustration — sticker 1",
     project:     "Heroes Series",
     client:      "GGN Studio",
     description: "Portrait illustration. Heroes Series.",
-    secondary:   ["album/Secondary/1b.png", "album/Secondary/1c.png"],
+    secondary:   ["album/Secondary/1b.webp", "album/Secondary/1c.webp"],
   },
   {
     id: 2,
-    img:         "album/Primary/2.png",
+    img:         "album/Primary/2.webp",
     alt:         "GGN Studio illustration — sticker 2",
     project:     "Heroes Series",
     client:      "GGN Studio",
@@ -26,7 +26,7 @@ const STICKERS = [
   },
   {
     id: 3,
-    img:         "album/Primary/3.png",
+    img:         "album/Primary/3.webp",
     alt:         "GGN Studio illustration — sticker 3",
     project:     "Heroes Series",
     client:      "GGN Studio",
@@ -34,7 +34,7 @@ const STICKERS = [
   },
   {
     id: 4,
-    img:         "album/Primary/4.png",
+    img:         "album/Primary/4.webp",
     alt:         "GGN Studio illustration — sticker 4",
     project:     "Heroes Series",
     client:      "GGN Studio",
@@ -42,7 +42,7 @@ const STICKERS = [
   },
   {
     id: 5,
-    img:         "album/Primary/5.png",
+    img:         "album/Primary/5.webp",
     alt:         "GGN Studio illustration — sticker 5",
     project:     "Heroes Series",
     client:      "GGN Studio",
@@ -50,7 +50,7 @@ const STICKERS = [
   },
   {
     id: 6,
-    img:         "album/Primary/6.png",
+    img:         "album/Primary/6.webp",
     alt:         "GGN Studio illustration — sticker 6",
     project:     "Regen Graphics FC",
     client:      "Non-League",
@@ -142,13 +142,13 @@ function blankHTML(s) {
 function peelHTML(s) {
   return `
     <div class="peel-stack">
-      <div class="peel-back peel-back--far"  aria-hidden="true"><img class="peel-img" src="client_sticker.png" alt="" draggable="false"></div>
-      <div class="peel-back peel-back--mid"  aria-hidden="true"><img class="peel-img" src="GGN.png" alt="" draggable="false"></div>
+      <div class="peel-back peel-back--far"  aria-hidden="true"><img class="peel-img" src="client_sticker.webp" alt="" draggable="false" loading="lazy"></div>
+      <div class="peel-back peel-back--mid"  aria-hidden="true"><img class="peel-img" src="GGN.webp" alt="" draggable="false" loading="lazy"></div>
       <div class="peel-top" id="peelTop"
            role="button" tabindex="0"
            aria-label="Grab this sticker and place it on slot 7"
            aria-grabbed="false">
-        <img class="peel-img" src="client_sticker.png" alt="Client sticker" draggable="false">
+        <img class="peel-img" src="client_sticker.webp" alt="Client sticker" draggable="false" loading="lazy">
       </div>
     </div>
     <div class="sticker-meta">
