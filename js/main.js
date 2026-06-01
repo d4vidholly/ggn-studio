@@ -333,7 +333,7 @@ function setupContactModal() {
     e.preventDefault();
     const form = e.target;
     try {
-      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST", body: new FormData(form), headers: { Accept: "application/json" }
       });
       if (res.ok) {
@@ -917,7 +917,7 @@ function setupForm() {
     e.preventDefault();
     const form = e.target;
     try {
-      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST", body: new FormData(form), headers: { Accept: "application/json" }
       });
       if (res.ok) {
