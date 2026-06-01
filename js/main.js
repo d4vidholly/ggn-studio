@@ -414,11 +414,15 @@ function setupPacket() {
   document.getElementById("packetScene").addEventListener("click", openPacket);
 }
 
+let packetOpened = false;
+
 function openPacket() {
+  if (packetOpened) return;
+  packetOpened = true;
+
   const btn    = document.getElementById("openBtn");
   const scene  = document.getElementById("packetScene");
 
-  if (btn.disabled) return;
   btn.disabled = true;
   scene.style.pointerEvents = "none";
 
@@ -476,6 +480,16 @@ function scrollToAbout() {
   const sparkles = document.getElementById("sparkleContainer");
 
   unlockAndAnimateLogo();
+
+  /* Update CTA to post-open state */
+  const btn = document.getElementById("openBtn");
+  btn.textContent = "Let's see who you got";
+  btn.classList.add("is-opened");
+  btn.disabled = false;
+  btn.addEventListener("click", () =>
+    document.getElementById("about").scrollIntoView({ behavior: "smooth" })
+  );
+
   about.classList.add("is-revealed", "about--centering");
   about.scrollIntoView({ behavior: "smooth" });
 
