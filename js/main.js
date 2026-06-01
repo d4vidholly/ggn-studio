@@ -13,6 +13,7 @@ const STICKERS = [
     project:     "Jackson Irvine",
     client:      "Socceroos",
     description: "Portrait illustration. Procreate.",
+    bg:          "none",
   },
   {
     id: 2,
@@ -113,7 +114,7 @@ function filledHTML(s) {
     <div class="sticker-frame">
       <div class="sticker-guide"></div>
       <button class="sticker-btn" aria-label="Open ${s.alt}">
-        <img class="sticker-img" src="${s.img}" alt="${s.alt}" loading="lazy">
+        <img class="sticker-img" src="${s.img}" alt="${s.alt}" loading="lazy"${s.bg ? ` style="background:${s.bg}"` : ""}>
       </button>
     </div>
     <div class="sticker-meta">
@@ -817,7 +818,7 @@ function setupModal() {
 function openModal(s) {
   lastFocus = document.activeElement;
 
-  modalSlides = [{ src: s.img, alt: s.alt, type: "img" }];
+  modalSlides = [{ src: s.img, alt: s.alt, type: "img", bg: s.bg }];
   (s.secondary || []).forEach((src) => {
     modalSlides.push({ src, alt: s.alt, type: src.endsWith(".mp4") ? "video" : "img" });
   });
@@ -844,7 +845,8 @@ function openModal(s) {
 
 function renderModalSlide() {
   const viewer        = document.getElementById("modalViewer");
-  const { src, alt, type } = modalSlides[modalIdx];
+  const { src, alt, type, bg } = modalSlides[modalIdx];
+  if (bg) viewer.style.background = bg; else viewer.style.removeProperty("background");
   if (type === "video") {
     viewer.innerHTML = `<video class="modal-media" src="${src}" autoplay muted loop playsinline></video>`;
   } else {
