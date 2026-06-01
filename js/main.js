@@ -329,12 +329,18 @@ function setupContactModal() {
   document.getElementById("contactModalWrap").addEventListener("click", (e) => {
     if (e.target === e.currentTarget) closeContactModal();
   });
-  document.getElementById("contactModalForm").addEventListener("submit", (e) => {
+  document.getElementById("contactModalForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const ok = document.getElementById("contactModalOk");
-    ok.hidden = false;
-    e.target.reset();
-    ok.focus();
+    const form = e.target;
+    try {
+      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST", body: new FormData(form), headers: { Accept: "application/json" }
+      });
+      if (res.ok) {
+        const ok = document.getElementById("contactModalOk");
+        ok.hidden = false; form.reset(); ok.focus();
+      }
+    } catch (_) {}
   });
   document.addEventListener("keydown", (e) => {
     if (!document.getElementById("contactModalWrap").hidden && e.key === "Escape") {
@@ -907,18 +913,18 @@ function trapFocus(e) {
 
 /* ── Contact form ─────────────────────────────────────────── */
 function setupForm() {
-  document.getElementById("contactForm").addEventListener("submit", (e) => {
+  document.getElementById("contactForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    /*
-     * TODO: connect to form backend.
-     * Option A — Formspree: add action="https://formspree.io/f/YOUR_ID" method="POST"
-     *            to <form> and remove this handler.
-     * Option B — keep this JS handler and POST to your own endpoint.
-     */
-    const ok = document.getElementById("formOk");
-    ok.hidden = false;
-    e.target.reset();
-    ok.focus();
+    const form = e.target;
+    try {
+      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST", body: new FormData(form), headers: { Accept: "application/json" }
+      });
+      if (res.ok) {
+        const ok = document.getElementById("formOk");
+        ok.hidden = false; form.reset(); ok.focus();
+      }
+    } catch (_) {}
   });
 }
 
