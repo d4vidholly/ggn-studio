@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GGN Studio — Football Illustration</title>
+  <meta name="description" content="Football illustration from non-league to the top flight. Based in Australia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a href="#about" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="GGN Studio — top">GGN<span>Studio</span></a>
+      <div class="nav-right" id="navRight">
+        <ul class="nav-links" role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#album">Album</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">
+          <span class="theme-toggle-label">Dynamic</span>
+        </button>
+      </div>
+      <button class="nav-hamburger" id="navHamburger"
+              aria-label="Open navigation menu" aria-expanded="false">
+        <span class="ham-bar"></span>
+        <span class="ham-bar"></span>
+        <span class="ham-bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ① HERO -->
+  <section id="hero" class="hero" aria-label="Welcome">
+    <div class="hero-inner">
+
+      <div class="hero-left">
+        <h1 class="hero-headline">Got. Got.<br>Need a Sports<br>illustrator?</h1>
+      </div>
+
+      <div class="hero-right" aria-hidden="true">
+        <!-- Packet is decorative; openBtn is the real control -->
+        <div class="packet-scene" id="packetScene">
+          <img class="pkt-foil" id="pktFoil" src="packet.png" alt="" draggable="false">
+        </div>
+      </div>
+
+      <button class="hero-cta" id="openBtn">
+        Open your packet <span aria-hidden="true"></span>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- ② ABOUT -->
+  <section id="about" class="about" aria-label="About">
+    <div class="section-inner about-inner">
+
+      <div class="about-card-col">
+        <div class="holo-card" id="holoCard">
+          <div class="holo-border">
+            <div class="holo-face">
+              <!--
+                Swap src for your portrait illustration.
+                Recommended: export at 800×1200px, save to assets/portrait.jpg
+              -->
+              <img
+                class="holo-img"
+                id="artistImg"
+                src="GGN2.png"
+                alt="GGN Studio — artist portrait"
+                loading="lazy"
+              >
+              <div class="holo-layer" id="holoLayer" aria-hidden="true"></div>
+              <div class="sparkle-container" id="sparkleContainer" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text-col">
+        <h2 class="about-title" data-stage="0">David Holly</h2>
+        <p class="about-lead" data-stage="1">
+          Sports Illustrator. Free agent looking for the right club.
+        </p>
+        <p class="about-body" data-stage="1" style="--sd:0.12s">
+          My dream of being a professional footballer never got further than Sunday League. But my dream of illustrating for professional sports teams has never felt more alive.
+<br><br>
+Qualified Industrial Designer — precision and creativity in everything I do. I draw on Procreate, backed up by Illustrator, Photoshop and InDesign when the job needs it. Based in Australia, originally UK, working my way up from non-league to wherever the game takes me.
+        </p>
+
+        <a href="#album" class="scroll-prompt" data-stage="3">
+          <span class="scroll-label">Scroll to view the Album</span>
+          <span class="scroll-arrow" aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ③ ALBUM -->
+  <section id="album" class="album" aria-label="Work — The Album">
+    <div class="section-inner">
+      <div class="album-header">
+        <h2 class="section-heading">The Album</h2>
+        <p class="album-note">Tap any sticker to see process and more.</p>
+      </div>
+      <div class="album-grid" id="albumGrid" role="list" aria-label="Football illustration album"></div>
+    </div>
+  </section>
+
+  <!-- ④ CONTACT -->
+  <section id="contact" class="contact" aria-label="Contact">
+    <div class="section-inner contact-inner">
+
+      <div class="contact-lead">
+        <h2 class="contact-heading">Want to swap details?<br>Get in touch.</h2>
+        <p class="contact-sub">Working with a club or studio in Australia? Let's talk.</p>
+        <div class="contact-links">
+          <a href="mailto:hello@ggn.studio" class="contact-link">
+            <span class="cl-label">Email</span>
+            hello@ggn.studio
+          </a>
+          <a href="https://instagram.com/ggnstudio" class="contact-link"
+             target="_blank" rel="noopener noreferrer">
+            <span class="cl-label">Instagram</span>
+            @ggnstudio
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate aria-label="Send a message">
+        <div class="form-row">
+          <label for="f-name">Name</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" required placeholder="Your name">
+        </div>
+        <div class="form-row">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" required placeholder="you@email.com">
+        </div>
+        <div class="form-row">
+          <label for="f-msg">Message</label>
+          <textarea id="f-msg" name="message" rows="4" required placeholder="What are you working on?"></textarea>
+        </div>
+        <button type="submit" class="form-btn">Send</button>
+        <p class="form-ok" id="formOk" aria-live="polite" tabindex="-1" hidden>
+          Got it. I'll be in touch.
+        </p>
+      </form>
+
+    </div>
+    <div class="contact-footer">
+      <p class="contact-tagline">GGN Studio — Got. Got. Need.</p>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal-wrap" id="modalWrap"
+       role="dialog" aria-modal="true" aria-labelledby="modal-project" hidden>
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-viewer-wrap">
+        <div class="modal-viewer" id="modalViewer"></div>
+        <button class="modal-nav modal-prev" id="modalPrev" aria-label="Previous slide" hidden>&#8249;</button>
+        <button class="modal-nav modal-next" id="modalNext" aria-label="Next slide"     hidden>&#8250;</button>
+      </div>
+      <div class="modal-dots" id="modalDots" aria-label="Slides" hidden></div>
+      <div class="modal-meta">
+        <p class="modal-project" id="modal-project"></p>
+        <p class="modal-client"  id="modal-client"></p>
+        <p class="modal-desc"    id="modal-desc" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact modal — triggered by sticker peel mechanic -->
+  <div class="modal-wrap" id="contactModalWrap"
+       role="dialog" aria-modal="true" aria-labelledby="cm-heading" hidden>
+    <div class="modal contact-modal" id="contactModal">
+      <button class="modal-close" id="contactModalClose" aria-label="Close">✕</button>
+      <div class="modal-meta">
+        <p class="modal-project" id="cm-heading">Got. Got. Need.</p>
+        <p class="modal-client">Looks like a perfect fit!</p>
+      </div>
+      <form class="contact-modal-form" id="contactModalForm" novalidate aria-label="Contact form">
+        <div class="form-row">
+          <label for="cm-name">Name</label>
+          <input type="text" id="cm-name" name="name" autocomplete="name" required placeholder="Your name">
+        </div>
+        <div class="form-row">
+          <label for="cm-email">Email</label>
+          <input type="email" id="cm-email" name="email" autocomplete="email" required placeholder="you@email.com">
+        </div>
+        <div class="form-row">
+          <label for="cm-msg">Message</label>
+          <textarea id="cm-msg" name="message" rows="3" required placeholder="What are you working on?"></textarea>
+        </div>
+        <button type="submit" class="form-btn">Send</button>
+        <p class="form-ok" id="contactModalOk" aria-live="polite" tabindex="-1" hidden>
+          Got it. I'll be in touch.
+        </p>
+      </form>
+    </div>
+  </div>
+
+
+  <script src="js/main.js"></script>
+</body>
+</html>
