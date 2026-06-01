@@ -183,7 +183,7 @@ html.site-locked .nav-hamburger { display: none; }
   display: flex; align-items: center; text-decoration: none;
 }
 .nav-logo-img {
-  height: 36px; width: auto; display: block;
+  height: 24px; width: auto; display: block;
 }
 .nav-links { display: flex; flex-direction: column; gap: 0; }
 .nav-links a {
@@ -382,8 +382,9 @@ html.site-locked .nav-hamburger { display: none; }
 /* Main foil packet */
 .pkt-foil {
   display: block;
-  width: 170px; height: auto;
+  width: 212px; height: auto;
   position: relative; z-index: 1;
+  margin: 0 auto;
 }
 
 /* Top flap */
@@ -1127,6 +1128,7 @@ video.modal-media { max-height: 50vh; }
 @media (min-width: 820px) {
 
   /* Nav: hamburger hidden, nav-right inline row */
+  .nav-logo-img { height: 36px; }
   .nav-hamburger { display: none; }
   .nav-right {
     position: static;
@@ -1211,20 +1213,18 @@ video.modal-media { max-height: 50vh; }
 }
 
 /* ============================================================
-   MOBILE PACKET — gold glow + bottom shadow
+   PACKET — gold glow + drop shadow (all viewports)
    ============================================================ */
-@media (max-width: 819px) {
-  .packet-scene {
-    filter:
-      drop-shadow(0 0 28px rgba(196,154,34,0.5))
-      drop-shadow(0 22px 40px rgba(0,0,0,0.65))
-      drop-shadow(0 6px 12px rgba(0,0,0,0.35));
-  }
-  .packet-scene:hover {
-    filter:
-      drop-shadow(0 0 38px rgba(196,154,34,0.65))
-      drop-shadow(0 26px 50px rgba(0,0,0,0.7));
-  }
+.packet-scene {
+  filter:
+    drop-shadow(0 0 28px rgba(196,154,34,0.5))
+    drop-shadow(0 22px 40px rgba(0,0,0,0.65))
+    drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+}
+.packet-scene:hover {
+  filter:
+    drop-shadow(0 0 38px rgba(196,154,34,0.65))
+    drop-shadow(0 26px 50px rgba(0,0,0,0.7));
 }
 
 /* ============================================================
