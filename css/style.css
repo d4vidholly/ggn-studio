@@ -1228,6 +1228,24 @@ video.modal-media { max-height: 50vh; }
 }
 
 /* ============================================================
+   MOBILE OVERRIDES — max-width 819px
+   ============================================================ */
+@media (max-width: 819px) {
+  /* Nav */
+  :root { --nav-h: 62px; }
+  .nav-logo-img { height: 30px; }
+
+  /* Hero packet — pull back from 212px */
+  .pkt-foil { width: 160px; }
+
+  /* Hero headline — 25% bigger */
+  .hero-headline { font-size: clamp(55px, 15vw, 108px); }
+
+  /* Hero — don't force full viewport height, let content breathe */
+  .hero { min-height: auto; padding-bottom: clamp(40px, 8vw, 60px); }
+}
+
+/* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
