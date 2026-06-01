@@ -7,9 +7,9 @@
    Monochrome platform. Black, white, shades of grey. No colour accents. */
 :root {
   --hero-bg:    #0A0A0A;
-  --about-bg:   #0A0A0A;
+  --about-bg:   #1E1E1E;
   --album-bg:   #F4F4F4;
-  --contact-bg: #111111;
+  --contact-bg: #0F0F0F;
   --nav-bg:     rgba(10,10,10,0.96);
   --nav-border: rgba(255,255,255,0.09);
 
