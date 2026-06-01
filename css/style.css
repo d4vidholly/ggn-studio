@@ -64,7 +64,7 @@
 
   --cta-bg:     #F5C518;
   --cta-hover:  #d4a900;
-  --cta-ink:    #FFFFFF;
+  --cta-ink:    var(--ink-dark);
 }
 
 /* === RESET === */
@@ -231,7 +231,7 @@ html.site-locked .nav-hamburger { display: none; }
    ============================================================ */
 .hero {
   min-height: 100vh; min-height: 100svh;
-  display: flex; align-items: center;
+  display: flex; align-items: flex-start;
   padding-top: var(--nav-h);
   background: var(--hero-bg);
   overflow: hidden;
@@ -254,15 +254,16 @@ html.site-locked .nav-hamburger { display: none; }
 
 .hero-cta { position: relative; z-index: 2; }
 
-/* CTA pinned to bottom of screen while site is locked */
-html.site-locked .hero-cta {
-  position: fixed;
-  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  z-index: 50;
-  margin-top: 0;
+/* CTA pinned to bottom on mobile while site is locked — desktop stays in grid */
+@media (max-width: 819px) {
+  html.site-locked .hero-cta {
+    position: fixed;
+    bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 50;
+  }
 }
 
 /* Tight layout only for very small phones (SE etc) */
@@ -966,7 +967,7 @@ html.site-locked .hero-cta {
 .modal-close {
   position: absolute; top: 6px; right: 6px;
   width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(26,23,20,0.1); font-size: 13px; color: var(--ink);
+  background: rgba(26,23,20,0.1); font-size: 13px; color: var(--ink-dark);
   display: flex; align-items: center; justify-content: center;
   z-index: 10; transition: background 0.15s;
 }
@@ -1050,10 +1051,28 @@ video.modal-media { max-height: 50vh; }
 .modal-desc[hidden] { display: none; }
 
 /* Contact modal (sticker peel) — form on white, same .modal shell */
+.contact-modal .modal-close {
+  background: none;
+  color: rgba(26,23,20,0.5);
+}
+.contact-modal .modal-close:hover { background: none; color: rgba(26,23,20,0.85); }
 .contact-modal .modal-meta {
   padding: 24px 20px 16px;
   border-bottom: 1px solid rgba(26,23,20,0.08);
 }
+.contact-modal .hero-cta {
+  background: var(--ink-dark);
+  color: var(--white);
+  width: 100%; justify-content: center;
+  align-self: stretch;
+  border-color: transparent;
+}
+.contact-modal .hero-cta:hover { background: #000; }
+[data-theme="dynamic"] .contact-modal .hero-cta {
+  background: var(--cta-bg);
+  color: var(--cta-ink);
+}
+[data-theme="dynamic"] .contact-modal .hero-cta:hover { background: var(--cta-hover); }
 .contact-modal-form {
   display: flex; flex-direction: column; gap: 14px;
   padding: 16px 20px 24px;
@@ -1100,6 +1119,9 @@ video.modal-media { max-height: 50vh; }
     display: inline; padding: 0; border-bottom: none;
   }
   .nav-links li:last-child a { border-bottom: none; }
+
+  /* Hero: vertically centred on desktop */
+  .hero { align-items: center; }
 
   /* Hero: two-column grid — text (row 1) + button (row 2) left, packet spans right */
   .hero-inner {
@@ -1151,6 +1173,23 @@ video.modal-media { max-height: 50vh; }
   .modal-viewer { max-height: 480px; }
   .modal-media  { max-height: 480px; }
   video.modal-media { max-height: 480px; }
+}
+
+/* ============================================================
+   MOBILE PACKET — gold glow + bottom shadow
+   ============================================================ */
+@media (max-width: 819px) {
+  .packet-scene {
+    filter:
+      drop-shadow(0 0 28px rgba(196,154,34,0.5))
+      drop-shadow(0 22px 40px rgba(0,0,0,0.65))
+      drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+  }
+  .packet-scene:hover {
+    filter:
+      drop-shadow(0 0 38px rgba(196,154,34,0.65))
+      drop-shadow(0 26px 50px rgba(0,0,0,0.7));
+  }
 }
 
 /* ============================================================
