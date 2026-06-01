@@ -162,12 +162,13 @@ function setupStickerPeel() {
   const peelTop = document.getElementById("peelTop");
   if (!peelTop) return;
 
-  let isDragging = false;
-  let ghost      = null;
-  let originRect = null;
-  let offsetX    = 0;
-  let offsetY    = 0;
-  let isPlaced   = false;
+  let isDragging   = false;
+  let ghost        = null;
+  let originRect   = null;
+  let offsetX      = 0;
+  let offsetY      = 0;
+  let isPlaced     = false;
+  let pendingStart = null; /* touch start coords — not yet committed to drag */
 
   function slot7Frame() {
     return document.querySelector('[data-slot-id="7"] .sticker-frame');
@@ -189,26 +190,50 @@ function setupStickerPeel() {
     return g;
   }
 
-  function startDrag(clientX, clientY) {
-    if (isPlaced) return;
+  function commitGhostDrag(startX, startY, currentX, currentY) {
     isDragging = true;
     const rect = peelTop.getBoundingClientRect();
     originRect = rect;
-    offsetX    = clientX - rect.left;
-    offsetY    = clientY - rect.top;
+    offsetX    = startX - rect.left;
+    offsetY    = startY - rect.top;
     ghost      = makeGhost(rect);
+    ghost.style.left = (currentX - offsetX) + "px";
+    ghost.style.top  = (currentY - offsetY) + "px";
     peelTop.classList.add("is-peeling");
     peelTop.setAttribute("aria-grabbed", "true");
     document.body.classList.add("is-dragging-sticker");
+    pendingStart = null;
+  }
+
+  function startDrag(clientX, clientY, isTouch) {
+    if (isPlaced) return;
+    if (isTouch) {
+      /* Defer ghost creation until we confirm it's a horizontal drag, not a scroll */
+      pendingStart = { clientX, clientY };
+    } else {
+      commitGhostDrag(clientX, clientY, clientX, clientY);
+    }
   }
 
   function moveDrag(clientX, clientY) {
+    if (pendingStart) {
+      const dx = Math.abs(clientX - pendingStart.clientX);
+      const dy = Math.abs(clientY - pendingStart.clientY);
+      if (dx + dy < 6) return;
+      if (dx >= dy) {
+        commitGhostDrag(pendingStart.clientX, pendingStart.clientY, clientX, clientY);
+      } else {
+        pendingStart = null; /* vertical scroll — cancel */
+      }
+      return;
+    }
     if (!isDragging || !ghost) return;
     ghost.style.left = (clientX - offsetX) + "px";
     ghost.style.top  = (clientY - offsetY) + "px";
   }
 
   function endDrag(clientX, clientY) {
+    pendingStart = null;
     if (!isDragging || !ghost) return;
     isDragging = false;
     document.body.classList.remove("is-dragging-sticker");
@@ -260,12 +285,12 @@ function setupStickerPeel() {
     }, 420);
   }
 
-  peelTop.addEventListener("mousedown",  (e) => { e.preventDefault(); startDrag(e.clientX, e.clientY); });
+  peelTop.addEventListener("mousedown",  (e) => { e.preventDefault(); startDrag(e.clientX, e.clientY, false); });
   document.addEventListener("mousemove", (e) => moveDrag(e.clientX, e.clientY));
   document.addEventListener("mouseup",   (e) => endDrag(e.clientX, e.clientY));
 
-  peelTop.addEventListener("touchstart",  (e) => { startDrag(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-  document.addEventListener("touchmove",  (e) => { if (isDragging) moveDrag(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  peelTop.addEventListener("touchstart",  (e) => { startDrag(e.touches[0].clientX, e.touches[0].clientY, true); }, { passive: true });
+  document.addEventListener("touchmove",  (e) => { if (isDragging || pendingStart) moveDrag(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
   document.addEventListener("touchend",   (e) => endDrag(e.changedTouches[0].clientX, e.changedTouches[0].clientY));
 }
 
@@ -498,11 +523,30 @@ function slideCardLeft() {
   const about = document.getElementById("about");
   const card  = document.getElementById("holoCard");
 
-  /* Mobile: single-column layout — no left column to slide to.
-     Skip FLIP or transitionend won't fire and text stays hidden. */
+  /* Mobile: single-column layout. Measure card position before and after
+     removing about--centering so the card slides up smoothly as text appears. */
   if (window.innerWidth < 820) {
+    const before = card.getBoundingClientRect();
     about.classList.remove("about--centering");
-    revealStagedText();
+    const after = card.getBoundingClientRect();
+    const dy = before.top - after.top;
+
+    if (Math.abs(dy) > 1) {
+      card.style.transition = "none";
+      card.style.transform  = `rotate(-5deg) translateY(${dy}px)`;
+      void card.getBoundingClientRect();
+      card.style.transition = "transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)";
+      card.style.transform  = "rotate(-5deg)";
+      card.addEventListener("transitionend", function onEnd(e) {
+        if (e.propertyName !== "transform") return;
+        card.removeEventListener("transitionend", onEnd);
+        card.style.removeProperty("transform");
+        card.style.removeProperty("transition");
+        revealStagedText();
+      });
+    } else {
+      revealStagedText();
+    }
     return;
   }
 
