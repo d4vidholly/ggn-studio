@@ -65,6 +65,8 @@ const STICKERS = [
 const ROTS = [-1.5, 2.0, -1.2, 1.8, -2.0, 1.4, -1.7, 2.1];
 
 /* ── Init ─────────────────────────────────────────────────── */
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("js-loaded");
   document.documentElement.classList.add("site-locked");
@@ -410,7 +412,7 @@ function openPacket() {
   btn.disabled = true;
   scene.style.pointerEvents = "none";
 
-  if (prefersReducedMotion()) {
+  if (reducedMotion) {
     scrollToAbout();
     return;
   }
@@ -430,7 +432,7 @@ let siteRevealed = false;
 let textRevealed = false;
 
 function unlockAndAnimateLogo() {
-  if (prefersReducedMotion()) {
+  if (reducedMotion) {
     document.documentElement.classList.remove("site-locked");
     return;
   }
@@ -477,7 +479,7 @@ function scrollToAbout() {
   about.classList.add("is-revealed", "about--centering");
   about.scrollIntoView({ behavior: "smooth" });
 
-  if (prefersReducedMotion()) { revealAll(); return; }
+  if (reducedMotion) { revealAll(); return; }
 
   /* Card wow entrance — centred in section via layout */
   setTimeout(() => {
@@ -620,7 +622,7 @@ function setupHoloCard() {
   const card     = document.getElementById("holoCard");
   const sparkles = document.getElementById("sparkleContainer");
 
-  if (!card || prefersReducedMotion()) return;
+  if (!card || reducedMotion) return;
 
   let sparkleInterval = null;
   let isGrabbing      = false;
@@ -929,6 +931,3 @@ function setupForm() {
 }
 
 /* ── Utilities ────────────────────────────────────────────── */
-function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
