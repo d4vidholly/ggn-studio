@@ -9,52 +9,51 @@ const STICKERS = [
   {
     id: 1,
     img:         "album/Primary/1.webp",
-    alt:         "GGN Studio illustration — sticker 1",
-    project:     "Heroes Series",
-    client:      "GGN Studio",
-    description: "Portrait illustration. Heroes Series.",
-    secondary:   ["album/Secondary/1b.webp", "album/Secondary/1c.webp"],
+    alt:         "Erling Haaland — GGN Studio portrait illustration",
+    project:     "Erling Haaland",
+    client:      "Cup Heroes Series - Wembley Game",
+    description: "Portrait illustration. Procreate.",
   },
   {
     id: 2,
     img:         "album/Primary/2.webp",
-    alt:         "GGN Studio illustration — sticker 2",
-    project:     "Heroes Series",
-    client:      "GGN Studio",
-    description: "Portrait illustration. Heroes Series.",
-    secondary:   ["album/Secondary/2b.mp4"],
+    alt:         "Kevin De Bruyne — GGN Studio portrait illustration",
+    project:     "Kevin De Bruyne",
+    client:      "Cup Heroes Series - Wembley Game",
+    description: "Portrait illustration. Procreate.",
   },
   {
     id: 3,
     img:         "album/Primary/3.webp",
-    alt:         "GGN Studio illustration — sticker 3",
-    project:     "Heroes Series",
-    client:      "GGN Studio",
-    description: "Portrait illustration. Heroes Series.",
+    alt:         "Michael Carrick — GGN Studio portrait illustration",
+    project:     "Michael Carrick",
+    client:      "Editorial Submission",
+    description: "Portrait illustration. Procreate.",
   },
   {
     id: 4,
     img:         "album/Primary/4.webp",
-    alt:         "GGN Studio illustration — sticker 4",
-    project:     "Heroes Series",
-    client:      "GGN Studio",
-    description: "Portrait illustration. Heroes Series.",
+    alt:         "Didier Drogba — GGN Studio portrait illustration",
+    project:     "Didier Drogba",
+    client:      "Cup Heroes Series - Wembley Game",
+    description: "Portrait illustration. Procreate.",
   },
   {
     id: 5,
     img:         "album/Primary/5.webp",
-    alt:         "GGN Studio illustration — sticker 5",
-    project:     "Heroes Series",
-    client:      "GGN Studio",
-    description: "Portrait illustration. Heroes Series.",
+    alt:         "Regen Graphics FC — GGN Studio kit illustration",
+    project:     "Social Media Submission",
+    client:      "Alnwick Town",
+    description: "Full-body kit illustration. Non-league commission.",
   },
   {
     id: 6,
     img:         "album/Primary/6.webp",
-    alt:         "GGN Studio illustration — sticker 6",
-    project:     "Regen Graphics FC",
-    client:      "Non-League",
-    description: "Full-body kit illustration. Non-league commission.",
+    alt:         "Tow Law Town FC — GGN Studio ground illustration",
+    project:     "Programme Submission",
+    client:      "Tow Law Town",
+    description: "Ground illustration. Matchday programme cover. EBAC Northern League Division 2.",
+    secondary:   ["album/Secondary/6b.webp"],
   },
   /* Slot 7 — blank guide, target for peel mechanic */
   { id: 7, blank: true, num: "07", badge: "", text: "This could be you!" },
@@ -76,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupContactModal();
   setupModal();
   setupForm();
-  setupThemeToggle();
   setupHamburger();
   /* Direct hash navigation bypasses the packet — reveal everything immediately */
   if (window.location.hash && window.location.hash !== "#hero") revealAll();
@@ -126,15 +124,15 @@ function filledHTML(s) {
 function blankHTML(s) {
   return `
     <div class="sticker-frame">
-      <div class="sticker-guide blank-content" aria-hidden="true">
-        <span class="blank-num">${s.num}</span>
-        <div class="blank-square"></div>
-        ${s.text ? `<span class="blank-text">${s.text}</span>` : ''}
-      </div>
+      <div class="sticker-guide" aria-hidden="true"></div>
       <div class="sticker-btn" aria-hidden="true"><div class="sticker-img"></div></div>
+      <div class="blank-overlay" aria-hidden="true">
+        <span class="blank-num">${s.num}</span>
+        <img class="blank-logo" src="logo_black.png" alt="">
+      </div>
     </div>
     <div class="sticker-meta">
-      <p class="meta-project">Coming Soon</p>
+      <p class="meta-project">Your Project Here:</p>
       <p class="meta-client">—</p>
     </div>`;
 }
@@ -152,7 +150,7 @@ function peelHTML(s) {
       </div>
     </div>
     <div class="sticker-meta">
-      <p class="meta-project">Coming Soon</p>
+      <p class="meta-project">Your Project Pile</p>
       <p class="meta-client">—</p>
     </div>`;
 }
@@ -268,6 +266,8 @@ function setupStickerPeel() {
       ghost = null;
       peelTop.classList.add("is-placed");
       peelTop.classList.remove("is-peeling");
+      const slot8Meta = document.querySelector('[data-slot-id="8"] .meta-project');
+      if (slot8Meta) slot8Meta.textContent = "Your New Signing?";
       setTimeout(openContactModal, 1000);
     }, 320);
   }
@@ -384,28 +384,6 @@ function setupHamburger() {
 }
 
 /* ── Theme toggle ─────────────────────────────────────────── */
-function setupThemeToggle() {
-  const btn = document.getElementById("themeToggle");
-  if (!btn) return;
-
-  const label = btn.querySelector(".theme-toggle-label");
-  const saved = localStorage.getItem("ggn-theme") || "editorial";
-
-  applyTheme(saved);
-
-  btn.addEventListener("click", () => {
-    const current = document.body.dataset.theme || "editorial";
-    const next = current === "editorial" ? "dynamic" : "editorial";
-    applyTheme(next);
-    localStorage.setItem("ggn-theme", next);
-  });
-
-  function applyTheme(theme) {
-    document.body.dataset.theme = theme;
-    label.textContent = theme === "editorial" ? "Dynamic" : "Editorial";
-    btn.setAttribute("aria-label", `Switch to ${theme === "editorial" ? "dynamic" : "editorial"} theme`);
-  }
-}
 
 /* ── Packet open ──────────────────────────────────────────── */
 function setupPacket() {
@@ -519,7 +497,7 @@ function scrollToAbout() {
 
   /* Nav + remaining sections follow */
   setTimeout(() => {
-    document.querySelectorAll(".nav-links, .theme-toggle, .nav-hamburger").forEach(el =>
+    document.querySelectorAll(".nav-links, .nav-cta, .nav-hamburger").forEach(el =>
       el.classList.add("is-revealed")
     );
   }, 3400);
@@ -606,7 +584,7 @@ function revealAll() {
   ["about", "album", "contact"].forEach(id =>
     document.getElementById(id)?.classList.add("is-revealed")
   );
-  document.querySelectorAll(".nav-links, .theme-toggle, .nav-hamburger").forEach(el =>
+  document.querySelectorAll(".nav-links, .nav-cta, .nav-hamburger").forEach(el =>
     el.classList.add("is-revealed")
   );
   revealStagedText(true);

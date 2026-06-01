@@ -10,23 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-skin="noir">
 
   <a href="#about" class="skip-link">Skip to main content</a>
 
   <!-- NAV -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo" aria-label="GGN Studio — top">GGN<span>Studio</span></a>
+      <a href="#hero" class="nav-logo" aria-label="GGN Studio — top">
+        <img src="logo_white.png" alt="GGN Studio" class="nav-logo-img">
+      </a>
       <div class="nav-right" id="navRight">
         <ul class="nav-links" role="list">
           <li><a href="#about">About</a></li>
-          <li><a href="#album">Album</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#album">Work</a></li>
         </ul>
-        <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">
-          <span class="theme-toggle-label">Dynamic</span>
-        </button>
+        <a href="#contact" class="nav-cta">Get in Touch</a>
       </div>
       <button class="nav-hamburger" id="navHamburger"
               aria-label="Open navigation menu" aria-expanded="false">
@@ -48,7 +47,7 @@
       <div class="hero-right" aria-hidden="true">
         <!-- Packet is decorative; openBtn is the real control -->
         <div class="packet-scene" id="packetScene">
-          <img class="pkt-foil" id="pktFoil" src="packet.webp" alt="" draggable="false">
+          <img class="pkt-foil" id="pktFoil" src="packet.png" alt="" draggable="false">
         </div>
       </div>
 
@@ -157,7 +156,8 @@ Qualified Industrial Designer — precision and creativity in everything I do. I
 
     </div>
     <div class="contact-footer">
-      <p class="contact-tagline">GGN Studio — Got. Got. Need.</p>
+      <img src="logo_white.png" alt="GGN Studio" class="footer-logo">
+      <p class="contact-tagline">Got. Got. Need.</p>
     </div>
   </section>
 
